@@ -1,45 +1,40 @@
-
 const templates = [
-{
+  {
     text: "セツ「……貝だね。思考の伝声管が罪っている。これは――恋？」",
     words: {
       貝: ["ハンバーグ", "サンドウィッチ", "カレー"],
       思考: ["朝", "昼", "夜"],
       伝声管: ["ピアノ", "電話", "イヤフォン"]
-    }
+    },
+    color: "#f9c74f"  // 黄色
   },
-    color: "#f9c74f"  // 枠の色を追加
-  },
-{
+  {
     text: "ジナ「ユーリは……流行歌の出口だったんだね」",
     words: {
       流行歌: ["ハンバーグ", "サンドウィッチ", "カレー"],
       出口: ["朝", "昼", "夜"],
-　　　ユーリ: ["ピアノ", "電話", "イヤフォン"]
-    }
+      ユーリ: ["ピアノ", "電話", "イヤフォン"]
+    },
+    color: "#90be6d"  // 緑
   },
-color: "#f9c74f"  // 枠の色を追加
-  },
-{
+  {
     text: "ＳＱ「んーと、これって八千二百京のぐりぐりってコト？」",
     words: {
       八千二百京: ["ハンバーグ", "サンドウィッチ", "カレー"],
       ぐりぐり: ["朝", "昼", "夜"]
-    }
+    },
+    color: "#f94144"  // 赤
   },
-color: "#f9c74f"  // 枠の色を追加
-  },
-{
+  {
     text: "ラキオ「全く開国開国って。口を開けばシナモンのことばかり。良い加減に若衆宿は卒業したら？」",
     words: {
       開国: ["投獄", "警告", "天然"],
       シナモン: ["朝", "昼", "夜"],
       若衆宿: ["ハンバーグ", "サンドウィッチ", "カレー"]
-    }
+    },
+    color: "#577590"  // 青
   },
-color: "#f9c74f"  // 枠の色を追加
-  },
-{
+    {
     text: "ステラ「今までの秘め事を見る限り……ユーリ様様様様様様様様様様様様」",
     words: {
       秘め事: ["ハンバーグ", "サンドウィッチ", "カレー"],
@@ -147,6 +142,8 @@ color: "#f9c74f"  // 枠の色を追加
 },
 color: "#f9c74f"  // 枠の色を追加
 },
+
+  // 他の構文も同じように color を追加
 ];
 
 
@@ -154,16 +151,9 @@ color: "#f9c74f"  // 枠の色を追加
    要素の取得
    ========================= */
 
-// 構文表示ボタン
 const dropdownButton = document.getElementById("dropdownButton");
-
-// 構文一覧ボックス
 const dropdownList = document.getElementById("dropdownList");
-
-// ボタン内の構文テキスト
 const selectedText = document.getElementById("selectedText");
-
-// 生成結果を表示する場所（idは自分のHTMLに合わせてね）
 const output = document.getElementById("output");
 
 
@@ -171,34 +161,29 @@ const output = document.getElementById("output");
    構文一覧を作る
    ========================= */
 
-// 一覧を一度空にする（再生成対策）
 dropdownList.innerHTML = "";
 
-// 「ランダム選択」用の項目を追加
+// ランダム選択用
 const randomItem = document.createElement("div");
 randomItem.textContent = "🎲 ランダム";
 randomItem.className = "dropdown-item";
-
 randomItem.addEventListener("click", () => {
-  selectedTemplate = null; // null＝ランダム扱い
+  selectedTemplate = null;
   selectedText.textContent = "ランダム";
   closeDropdown();
 });
-
 dropdownList.appendChild(randomItem);
 
-// 各構文を一覧に追加
+// 各構文追加
 templates.forEach((template) => {
   const item = document.createElement("div");
   item.textContent = template.text;
   item.className = "dropdown-item";
-
   item.addEventListener("click", () => {
     selectedTemplate = template;
     selectedText.textContent = template.text;
     closeDropdown();
   });
-
   dropdownList.appendChild(item);
 });
 
@@ -212,55 +197,36 @@ dropdownButton.addEventListener("click", () => {
   dropdownButton.classList.toggle("open");
 });
 
-// 閉じる処理を関数化
 function closeDropdown() {
   dropdownList.classList.add("hidden");
   dropdownButton.classList.remove("open");
 }
 
+
 /* =========================
-   構文の生成処理
+   生成処理
    ========================= */
 
-// 現在選ばれている構文
 let selectedTemplate = null;
 
-// 配列からランダムで1つ取る
 function randomFromArray(arr) {
   return arr[Math.floor(Math.random() * arr.length)];
 }
 
-// 生成ボタン用（HTML側で onclick などで呼ぶ）
 function generateSentence() {
-    const template = selectedTemplate ?? randomFromArray(templates);
+  const template = selectedTemplate ?? randomFromArray(templates);
 
   let result = template.text;
 
-  // 単語置き換え
   for (const key in template.words) {
     const word = randomFromArray(template.words[key]);
     result = result.replaceAll(key, word);
   }
 
-  // 生成結果を表示
+  // 表示
   output.textContent = result;
   output.classList.remove("hidden");
 
-  // ここを追加 → 枠の色を構文ごとに変える
+  // ★ここで枠の色を構文ごとに変える
   output.style.borderColor = template.color;
 }
-  // 構文を決定（選択 or ランダム）
-  const template =
-    selectedTemplate ?? randomFromArray(templates);
-
-  let result = template.text;
-
-  // 置き換え処理
-  for (const key in template.words) {
-    const word = randomFromArray(template.words[key]);
-    result = result.replaceAll(key, word);
-  }
-
-  output.textContent = result; output.classList.remove("hidden");
-}
-
