@@ -1,0 +1,26 @@
+<h1 class="title">水そうめんランダムジェネレーター</h1>
+
+<p class="description">
+  登録された構文の一部を、ランダムな単語に置き換えて文章を生成します。<br>
+  構文は自分で選ぶことも、ランダムにすることもできます。
+</p>
+
+
+<div class="dropdown-wrapper">
+  <!-- 構文選択ボタン -->
+  <div id="dropdownButton" class="dropdown-button">
+    <span id="selectedText">構文を選択</span>
+    <span class="arrow">▼</span>
+  </div>
+
+  <!-- 構文一覧 -->
+  <div id="dropdownList" class="dropdown-list hidden"></div>
+</div>
+
+<!-- 生成ボタン -->
+<button onclick="generateSentence()" style="margin-top: 12px;">
+  生成する
+</button>
+
+<!-- 出力結果 -->
+<div id="output"class="output hidden"style="margin-top: 16px; font-weight: bold;"></div>
