@@ -9,6 +9,13 @@
   line-height: 1.6;
 }
 
+body {
+  max-width: 600px;  /* PCだと少し横幅制限 */
+  margin: 0 auto;     /* 中央寄せ */
+  padding: 10px;      /* 余白 */
+  font-size: 16px;    /* 小さすぎない文字 */
+}
+
 
 body {
   font-family: system-ui;
@@ -36,6 +43,13 @@ body {
   width: 320px; 
   margin: 0 auto;/* ボタンと一覧の横幅 */
   font-family: sans-serif;
+}
+
+button, select {
+  width: 100%;        /* 幅いっぱいに広げる */
+  padding: 12px;      /* タップしやすい高さ */
+  font-size: 16px;
+  margin-top: 10px;   /* ボタン間の余白 */
 }
 
 
@@ -153,4 +167,12 @@ body {
     transform: scale(1);
     opacity: 1;
   }
+}
+.output {
+  border: 2px solid #666;
+  padding: 15px;
+  margin-top: 15px;
+  border-radius: 8px;
+  word-wrap: break-word; /* 長い文章を折り返す */
+  font-size: 18px;       /* 見やすいサイズ */
 }
