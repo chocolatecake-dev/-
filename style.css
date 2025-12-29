@@ -1,0 +1,156 @@
+.title {
+  font-size: 1.6em;
+  margin-bottom: 0.2em;
+}
+
+.description {
+  color: #555;
+  margin-bottom: 16px;
+  line-height: 1.6;
+}
+
+
+body {
+  font-family: system-ui;
+  background: #87ceeb;
+  color: #696969;
+  text-align: center;
+}
+/* =========================
+   全体のリセット（おまけ）
+   ========================= */
+
+/* 文字サイズや余白が環境でズレないようにする */
+* {
+  box-sizing: border-box;
+}
+
+
+/* =========================
+   ドロップダウン全体の枠
+   ========================= */
+
+/* ボタン＋一覧の基準になる箱 */
+.dropdown-wrapper {
+  position: relative;   /* ← 一覧の位置基準になる（超重要） */
+  width: 320px; 
+  margin: 0 auto;/* ボタンと一覧の横幅 */
+  font-family: sans-serif;
+}
+
+
+/* =========================
+   構文を表示しているボタン
+   ========================= */
+
+.dropdown-button {
+  display: flex;                /* 横並びにする */
+  justify-content: space-between; /* 文字と矢印を左右に分ける */
+  align-items: center;          /* 縦位置を中央揃え */
+
+  padding: 10px 12px;
+  border: 1px solid #aaa;
+  background: #fff;
+  cursor: pointer;
+
+  user-select: none;            /* ドラッグ選択されないように */
+}
+
+
+/* ホバー時（マウスを乗せた時） */
+.dropdown-button:hover {
+  background: #f2f2f2;
+}
+
+
+/* =========================
+   矢印（見た目だけ）
+   ========================= */
+
+.arrow {
+  font-size: 0.8em;
+  opacity: 0.7;
+}
+
+
+/* 一覧が開いている時に矢印を回す（任意） */
+.dropdown-button.open .arrow {
+  transform: rotate(180deg);
+}
+
+
+/* =========================
+   構文一覧ボックス
+   ========================= */
+
+.dropdown-list {
+  position: absolute;   /* 親（wrapper）を基準に配置 */
+  top: 100%;            /* ボタンの真下 */
+  left: 0;
+
+  width: 100%;
+  background: #fff;
+  border: 1px solid #aaa;
+  border-top: none;     /* ボタンと繋がって見えるように */
+
+  z-index: 10;          /* 他の要素より前に出す */
+}
+
+
+/* =========================
+   一覧の中の1項目
+   ========================= */
+
+.dropdown-item {
+  padding: 8px 12px;
+  cursor: pointer;
+}
+
+.dropdown-item:hover {
+  background: #e6e6e6;
+}
+
+
+/* =========================
+   表示・非表示制御
+   ========================= */
+
+.hidden {
+  display: none;
+}
+
+/* =========================
+   生成結果を目立たせる
+   ========================= */
+
+.output {
+  margin-top: 16px;
+  padding: 12px;
+  border: 2px solid #4a90e2;   /* 枠線 */
+  background: #f5f9ff;        /* うっすら色 */
+  border-radius: 8px;         /* 角を丸く */
+  font-size: 1.1em;
+}
+
+/* まだ生成されていない時は非表示にする */
+.output.hidden {
+  display: none;
+}
+/* =========================
+   生成時のちょいアニメーション
+   ========================= */
+
+.output {
+  animation: pop 0.25s ease;
+}
+
+@keyframes pop {
+  from {
+    transform: scale(0.98);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
